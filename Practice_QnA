@@ -1,0 +1,37 @@
+# Airflow Multiple Choice Questions with Explanations
+
+## 1. Which of the following Airflow CLI commands would quickly allow the team to know what version of Python the environment is running?
+- [ ] `airflow standalone`
+- [ ] `airflow python version`
+- [ ] `airflow version`
+- [x] `airflow info`
+
+**Explanation:** The `airflow info` command provides details about the Airflow environment, including the Python version, installed dependencies, and configurations.
+
+## 2. What happens when a DAG is deleted by using the Airflow UI?
+- [ ] All metadata related to the DAG is removed from the metadata database. The file corresponding to the DAG is deleted.
+- [ ] The file corresponding to the DAG is deleted. Only the history of the DAG runs remains in the Airflow UI.
+- [ ] The file corresponding to the DAG is put into an `archives` directory.
+- [x] All metadata related to the DAG is removed from the metadata database. The file corresponding to the DAG is not deleted.
+
+**Explanation:** Deleting a DAG from the UI only removes its metadata from the database, but the DAG file itself remains on the system and must be manually deleted.
+
+## 3. A member of a data team writes a Python script that downloads data from an API and stores it in a database on a daily basis. Is this scenario a use case for Airflow?
+- [ ] No
+- [x] Yes
+
+**Explanation:** Airflow is well-suited for scheduling and orchestrating tasks such as fetching data from an API and storing it in a database.
+
+## 4. Assume there is a DAG with four tasks labeled `t0`, `t1`, `t2`, and `t3`. Is writing the DAG's task dependency as `t0 >> t1 >> t2 >> t3` equivalent to writing `t3 << t2 << t1 << t0`?
+- [ ] No
+- [x] Yes
+
+**Explanation:** Both notations define the same sequence of dependencies, ensuring tasks execute in the correct order.
+
+## 5. In which of the following places do Airflow users set up the dependencies between tasks in a DAG?
+- [x] In the DAG file itself
+- [ ] In a Python file in the 'includes' directory
+- [ ] In the Airflow UI
+- [ ] In a separate configuration file
+
+**Explanation:** Task dependencies are defined programmatically in the DAG Python file, typically using `>>` and `<<` operators.
