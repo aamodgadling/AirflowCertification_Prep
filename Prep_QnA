@@ -1,0 +1,112 @@
+Question 1:  
+What is the difference between the execution_timeout from the BaseOperator and timeout from the BaseSensorOperator?
+ [] There is no difference, timeout overwrites the value of execution_timeout when defined
+ [x] With timeout and soft_fail set to True, the Sensor will be marked as SKIPPED, whereas with execution_timeout it will be marked as FAILED
+
+Question 2:  
+Examine the following task:
+ 
+What does depends_on_past mean?
+[x] If the task extract didn't succeed in the previous DAG Run, then it doesn't get triggered in the current DAG Run
+ [ ] If the task extract succeeded in the previous DAG Run, then it doesn't get triggered in the current DAG Run
+[ ] If the previous DAG Run didn't succeed, then it doesn't get triggered in the current DAG Run
+
+Question 3:  
+What are the different ways of creating DAG dependencies? (Select all that apply)
+[x] ExternalTaskSensor
+[ ] BranchPythonOperator
+ [x] TriggerDagRunOperator
+ [x] SubDAGs
+
+Question 4:  
+One of your tasks can take a lot time to finish, which may cause delay in your DAG Run completion.
+What parameter can you use to stop the DAG Run if it is not completed in a given interval of time?
+[x] dagrun_timeout
+ [ ] timeout
+ [ ] execution_timeout
+
+Question 5:  
+To avoid having a lot of DAG Runs as soon as you schedule your DAGs, you set the catchup parameter to the value of False.
+[ ] Can you still backfill the DAG?
+[x]  Yes, through the CLI for example.
+[ ] No. Once the catchup is disabled, you can't run non-triggered DAG Runs.
+
+Question 6:  
+What happens if you return nothing from the python function called by the BranchPythonOperator?
+[ ] All the next tasks are skipped
+[ ] The next task gets randomly executed
+[x] You get an error
+
+Question 7:  
+Is it possible to wait for the DAG triggered by the TriggerDagRunOperator to complete before executing the next task?
+ [ ] No
+ [x] Yes
+
+Question 8:  
+What is the purpose of the none_failed_or_skipped trigger rule?
+[x] To avoid getting skipped the task that depends on the tasks selected by the BranchPythonOperator
+[ ] To trigger your task once one upstream task gets skipped
+
+Question 9:  
+Give the code snippets below:
+A)
+process = PythonOperator(
+    task_id="process",
+    python_callable=_process,
+    op_args=["{{ var.json.job_name }}"]
+)
+B)
+process = PythonOperator(
+    task_id="process",
+    python_callable=_process,
+    op_args=[Variable.get("job_name")]
+)
+What is the main difference between A and B in fetching a variable with the PythonOperator?
+ There is no difference, both ways will make a connection to the DB each time the DAG is parsed
+ [ ] Only A will make a connection to the DB each time the DAG is parsed
+ [x] Only B will make a connection to the DB each time the DAG is parsed
+ [ ] B doesn't work
+
+Question 10:  
+Does the DAG below work (assuming that the rest of the code works)?
+ 
+[ x] Yes
+ [ ] No
+
+Question 11:  
+Is the following task idempotent?
+ 
+[x] Yes
+[ ] No
+
+Question 12:  
+Is there any difference between schedule_interval="*/10 * * * *" and schedule_interval=timedelta(minutes=10)?
+[ ] No, they are both identical
+[x] A Cron expression is stateless, whereas a timedelta is relative
+[ ] A schedule_interval parameter can't be defined with a timedelta object
+
+Question 13:  
+By default, the argument parameters of the PostgresOperator is not templated.
+Is there anything you can do so that parameters becomes a templated argument?
+[ ] No
+[x] Yes
+
+Question 14:  
+10 of your DAGs do similar things, with only a few parameters changing between them.
+What could you do to simplify your code?
+[ ] Nothing, we have to create manually each DAG even for slight differences between them
+[x] Generate DAGs dynamically
+
+Question 15:  
+Examine the following DAG:
+ 
+If wait_for_downstream is set to True for the task extract, what happens?
+[ ] The next DAG Run will run once all the tasks in the current DAG Run succeed
+[x] The task extract runs in the next DAG Run once extract and clean succeed in the current DAG Run
+[ ] The task store will run in the next DAG Run once it succeeds in the current DAG Run
+
+Question 16:  
+You want to share data between your tasks, and your Airflow instance runs with a MySQL database.
+Can you share 3 Gigabytes of data between 2 tasks using an XCom?
+[ ] Yes
+[x] No
